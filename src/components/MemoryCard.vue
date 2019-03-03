@@ -11,6 +11,7 @@
 
 <script>
   import MemoryCard from '../model/MemoryCard';
+  import FilterMixin from './mixins/filter-mixin';
 
   export default {
     props: {
@@ -19,11 +20,7 @@
         default: null,
       },
     },
-    filters: {
-      ucFirst (value) {
-        return value.toUpperCase();
-      },
-    },
+    mixins: [FilterMixin],
     computed: {
       cardImagePath () {
         return `/img/datasets/${this.card.dataSetName}/${this.card.name}.${this.card.extension}`;

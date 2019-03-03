@@ -6,9 +6,9 @@ Also, in this project I wanted to use as much ES6 and Vue features as I can. :)
 
 ## TODO
 
-- set selector with input binding
-- win game indicator
 - refactor the rest of pure js code to vue
+- make data set selector with input binding work
+- add win game indicator
 
 ## Project setup
 ```

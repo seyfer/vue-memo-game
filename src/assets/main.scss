@@ -1,2 +1,10 @@
 @import "base";
+@import "data-set-selector";
 @import "memory-game";
+
+.container {
+    margin: 15px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
