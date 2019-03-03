@@ -1,5 +1,15 @@
 # vue-memo-game
 
+Inspired by [this article on Medium](https://medium.freecodecamp.org/vanilla-javascript-tutorial-build-a-memory-game-in-30-minutes-e542c4447eae).
+
+Also, in this project I wanted to use as much ES6 and Vue features as I can. :)
+
+## TODO
+
+- set selector with input binding
+- win game indicator
+- refactor the rest of pure js code to vue
+
 ## Project setup
 ```
 yarn install
