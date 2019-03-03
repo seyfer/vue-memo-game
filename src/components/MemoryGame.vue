@@ -1,9 +1,9 @@
 <template>
     <div class="container">
-        <data-set-selector v-model="selectedDataSet"/>
+        <data-set-selector v-model="selectedDataSet" />
         <section class="memory-game">
             <memory-card v-for="(card, index) in shuffledDoubleCards" :key="card.name + index"
-                         :card="card"/>
+                         :card="card" />
         </section>
     </div>
 </template>
@@ -16,7 +16,12 @@
   import { DATA_SETS } from '../constants';
 
   export default {
-    data () {
+    components: {
+      MemoryCard,
+      DataSetSelector,
+    },
+    mixins: [ArrayMixin],
+    data() {
       return {
         cards: (new DataSetFactory()).create(this.selectedDataSet),
         hasFlippedCard: false,
@@ -24,34 +29,32 @@
         selectedDataSet: DATA_SETS.FRAMEWORKS,
       };
     },
-    components: {
-      MemoryCard,
-      DataSetSelector,
+    computed: {
+      doubleCards() {
+        return [...this.cards, ...this.cards];
+      },
+      shuffledDoubleCards() {
+        return this.shuffle(this.doubleCards);
+      },
     },
-    mixins: [ArrayMixin],
     watch: {
-      selectedDataSet (value) {
+      selectedDataSet(value) {
         this.cards = (new DataSetFactory()).create(value);
         this.initGame();
       },
     },
-    computed: {
-      doubleCards () {
-        return [...this.cards, ...this.cards];
-      },
-      shuffledDoubleCards () {
-        return this.shuffle(this.doubleCards);
-      },
+    mounted() {
+      this.initGame();
     },
     methods: {
-      initGame () {
+      initGame() {
         const self = this;
 
         let firstCard = null;
         let secondCard = null;
         this.hasFlippedCard = this.lockBoard = false;
 
-        function flipCard () {
+        function flipCard() {
           if (self.lockBoard) return;
           if (this === firstCard) return;
 
@@ -71,21 +74,21 @@
           checkForMatch();
         }
 
-        function checkForMatch () {
+        function checkForMatch() {
           // todo: should use MemoryCard class
-          let isMatch = firstCard.dataset.name === secondCard.dataset.name;
+          const isMatch = firstCard.dataset.name === secondCard.dataset.name;
 
           isMatch ? disableCards() : unflipCards();
         }
 
-        function disableCards () {
+        function disableCards() {
           firstCard.removeEventListener('click', flipCard);
           secondCard.removeEventListener('click', flipCard);
 
           resetBoard();
         }
 
-        function unflipCards () {
+        function unflipCards() {
           self.lockBoard = true;
 
           setTimeout(() => {
@@ -97,7 +100,7 @@
           }, 700);
         }
 
-        function resetBoard () {
+        function resetBoard() {
           [self.hasFlippedCard, self.lockBoard] = [false, false];
           [firstCard, secondCard] = [null, null];
         }
@@ -105,9 +108,6 @@
         const cards = document.querySelectorAll('.memory-card');
         cards.forEach(card => card.addEventListener('click', flipCard));
       },
-    },
-    mounted () {
-      this.initGame();
     },
   };
 </script>

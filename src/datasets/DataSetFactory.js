@@ -8,7 +8,7 @@ export default class DataSetFactory {
     frameworks: JSFrameworksDataSet,
   };
 
-  create (name, ...args) {
+  create(name, ...args) {
     const CLASS = this.classMap[name] || this.classMap.__default;
     return new CLASS(...args);
   }

@@ -1,0 +1,136 @@
+parserOptions:
+    parser: babel-eslint
+    ecmaVersion: 8
+    sourceType: module
+
+extends:
+    - 'eslint:recommended'
+    - 'plugin:vue/strongly-recommended'
+
+env:  {
+    browser: true,
+    node: true
+}
+
+root: true
+
+rules:
+    # strongly-recommended adjustments
+    vue/name-property-casing:
+        - off
+    vue/html-indent:
+        - off
+    vue/html-closing-bracket-newline:
+        - off
+    vue/max-attributes-per-line:
+        - off
+    vue/singleline-html-element-content-newline:
+        - off
+    vue/require-default-prop:
+        - off
+    vue/html-self-closing:
+        - warning
+        - {
+            html: {
+                void: "never",
+                normal: "never",
+                component: "always"
+            },
+            svg: "never",
+            math: "never"
+        }
+    vue/multiline-html-element-content-newline: 0
+
+    #from recommended
+    vue/this-in-template:
+        - error
+    vue/order-in-components:
+        - error
+
+    quotes:
+        - error
+        - single
+        - {
+            avoidEscape: true
+        }
+    prefer-const:
+        - warn
+    no-var:
+        - error
+    no-console:
+        - off
+    no-debugger:
+        - off
+    no-undef:
+        - off
+        - { typeof: true }
+    func-call-spacing:
+        - error
+        - never
+    space-before-function-paren:
+        - error
+        - {
+            anonymous: never,
+            named: never,
+            asyncArrow: never
+        }
+    arrow-spacing:
+        - error
+        - {
+            before: true,
+            after: true
+        }
+    comma-dangle:
+        - error
+        - {
+            arrays: always-multiline,
+            objects: always-multiline,
+            imports: always-multiline,
+        }
+    semi:
+        - error
+        - always
+    space-infix-ops:
+        - error
+        - {
+            int32Hint: false
+        }
+    space-unary-ops:
+        - error
+        - {
+            words: true,
+            nonwords: false
+        }
+    no-multi-spaces:
+        - error
+    no-trailing-spaces:
+        - error
+    block-spacing:
+        - error
+        - always
+    no-extra-semi:
+        - error
+    no-useless-escape:
+        - off
+    no-cond-assign:
+        - off
+    no-unused-vars:
+        - error
+    no-empty-pattern:
+        - off
+    brace-style:
+        - error
+    key-spacing:
+        - error
+        - { mode: "strict" }
+    space-before-blocks:
+        - error
+    space-in-parens:
+        - error
+        - never
+    indent: 0
+    camelcase:
+        - error
+    eqeqeq:
+        - error
+        - always

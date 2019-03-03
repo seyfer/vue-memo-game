@@ -1,11 +1,11 @@
 import MemoryCard from '../model/MemoryCard';
 
 export default class JSFrameworksDataSet {
-  static get name () {
+  static get name() {
     return 'frameworks';
   }
 
-  static get extension () {
+  static get extension() {
     return 'svg';
   }
 
@@ -15,7 +15,7 @@ export default class JSFrameworksDataSet {
     let index = 0;
     const data = this._cardsSet;
     return {
-      next () {
+      next() {
         return {
           value: new MemoryCard(data[index], JSFrameworksDataSet.name, JSFrameworksDataSet.extension),
           done: index++ >= data.length,

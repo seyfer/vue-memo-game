@@ -8,7 +8,7 @@
                         :value="dataSet"
                         :selected="dataSet === selected"
                 >
-                    {{dataSet|ucFirst}}
+                    {{ dataSet|ucFirst }}
                 </option>
             </select>
         </div>
@@ -28,7 +28,7 @@
       },
     },
     methods: {
-      onChange (e) {
+      onChange(e) {
         this.$emit('input', e.target.value);
       },
     },

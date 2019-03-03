@@ -1,5 +1,5 @@
 <template>
-    <memory-game/>
+    <memory-game />
 </template>
 
 <script>

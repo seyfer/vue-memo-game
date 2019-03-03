@@ -4,8 +4,8 @@
          :data-name="card.name"
          @click="flipCard"
     >
-        <img class="front-face" :src="cardImagePath" :alt="card.name|ucFirst"/>
-        <img class="back-face" :src="badgeImagePath" :alt="card.dataSetName + 'Badge'"/>
+        <img class="front-face" :src="cardImagePath" :alt="card.name|ucFirst" />
+        <img class="back-face" :src="badgeImagePath" :alt="card.dataSetName + 'Badge'" />
     </div>
 </template>
 
@@ -14,23 +14,23 @@
   import FilterMixin from './mixins/filter-mixin';
 
   export default {
+    mixins: [FilterMixin],
     props: {
       card: {
         type: MemoryCard,
         default: null,
       },
     },
-    mixins: [FilterMixin],
     computed: {
-      cardImagePath () {
+      cardImagePath() {
         return `/img/datasets/${this.card.dataSetName}/${this.card.name}.${this.card.extension}`;
       },
-      badgeImagePath () {
+      badgeImagePath() {
         return `/img/datasets/${this.card.dataSetName}/badge.${this.card.extension}`;
       },
     },
     methods: {
-      flipCard (e) {
+      flipCard(e) {
         console.log(e.target);
       },
     },
