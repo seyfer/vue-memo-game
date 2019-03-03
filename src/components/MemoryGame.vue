@@ -1,42 +1,49 @@
 <template>
     <section class="memory-game">
-        <memory-card v-for="(framework, index) in doubleCards" :key="framework + index" :framework-name="framework"/>
+        <memory-card v-for="(card, index) in shuffledDoubleCards" :key="card + index"
+                     :card="card"/>
     </section>
 </template>
 
 <script>
   import MemoryCard from './MemoryCard';
+  import DataSetFactory from '../datasets/DataSetFactory';
+  import ArrayMixin from './mixins/array-mixin';
 
   export default {
     data () {
       return {
-        cards: ['aurelia', 'vue', 'angular', 'ember', 'backbone', 'react'],
+        cards: (new DataSetFactory()).create('cats'),
+        hasFlippedCard: false,
+        lockBoard: false,
       };
     },
     components: {
       MemoryCard,
     },
+    mixins: [ArrayMixin],
     computed: {
       doubleCards () {
         return [...this.cards, ...this.cards];
       },
+      shuffledDoubleCards () {
+        return this.shuffle(this.doubleCards);
+      },
     },
     mounted () {
-      const cards = document.querySelectorAll('.memory-card');
+      const self = this;
 
-      let hasFlippedCard = false;
-      let lockBoard = false;
       let firstCard, secondCard;
 
       function flipCard () {
-        if (lockBoard) return;
+        if (self.lockBoard) return;
         if (this === firstCard) return;
 
         this.classList.add('flip');
 
-        if (!hasFlippedCard) {
+        if (!self.hasFlippedCard) {
           // first click
-          hasFlippedCard = true;
+          self.hasFlippedCard = true;
           firstCard = this;
 
           return;
@@ -49,7 +56,7 @@
       }
 
       function checkForMatch () {
-        let isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
+        let isMatch = firstCard.dataset.name === secondCard.dataset.name;
 
         isMatch ? disableCards() : unflipCards();
       }
@@ -62,7 +69,7 @@
       }
 
       function unflipCards () {
-        lockBoard = true;
+        self.lockBoard = true;
 
         setTimeout(() => {
           firstCard.classList.remove('flip');
@@ -73,16 +80,11 @@
       }
 
       function resetBoard () {
-        [hasFlippedCard, lockBoard] = [false, false];
+        [self.hasFlippedCard, self.lockBoard] = [false, false];
         [firstCard, secondCard] = [null, null];
       }
 
-      (function shuffle () {
-        cards.forEach(card => {
-          card.style.order = Math.floor(Math.random() * 12).toString();
-        });
-      })();
-
+      const cards = document.querySelectorAll('.memory-card');
       cards.forEach(card => card.addEventListener('click', flipCard));
     },
   };

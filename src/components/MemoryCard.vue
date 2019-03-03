@@ -1,15 +1,22 @@
 <template>
-    <div class="memory-card" :data-framework="frameworkName">
-        <img class="front-face" :src="cardImagePath" :alt="frameworkName|ucFirst"/>
-        <img class="back-face" src="../../public/img/js-badge.svg" alt="JS Badge"/>
+    <div v-if="card"
+         class="memory-card"
+         :data-name="card.name"
+         @click="flipCard"
+    >
+        <img class="front-face" :src="cardImagePath" :alt="card.name|ucFirst"/>
+        <img class="back-face" :src="badgeImagePath" :alt="card.dataSetName + 'Badge'"/>
     </div>
 </template>
 
 <script>
+  import MemoryCard from '../model/MemoryCard';
+
   export default {
     props: {
-      frameworkName: {
-        type: String,
+      card: {
+        type: MemoryCard,
+        default: null,
       },
     },
     filters: {
@@ -19,7 +26,15 @@
     },
     computed: {
       cardImagePath () {
-        return `/img/${this.frameworkName}.svg`;
+        return `/img/datasets/${this.card.dataSetName}/${this.card.name}.${this.card.extension}`;
+      },
+      badgeImagePath () {
+        return `/img/datasets/${this.card.dataSetName}/badge.${this.card.extension}`;
+      },
+    },
+    methods: {
+      flipCard (e) {
+        console.log(e.target);
       },
     },
   };
