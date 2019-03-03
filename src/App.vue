@@ -1,14 +1,14 @@
 <template>
-    <card-game/>
+    <memory-game/>
 </template>
 
 <script>
-  import CardGame from './components/CardGame';
+  import MemoryGame from './components/MemoryGame';
 
   export default {
     name: 'app',
     components: {
-      CardGame,
+      MemoryGame,
     },
   };
 </script>
