@@ -10,6 +10,9 @@
     components: {
       MemoryGame,
     },
+    mounted() {
+      console.log(this.$store);
+    },
   };
 </script>
 
