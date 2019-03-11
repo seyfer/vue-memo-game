@@ -31,6 +31,7 @@
     },
     methods: {
       flipCard(e) {
+        //todo: use MemoryCard, not dom elements
         console.log(e.target);
       },
     },

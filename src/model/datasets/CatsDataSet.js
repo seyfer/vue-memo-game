@@ -1,6 +1,8 @@
-import MemoryCard from '../model/MemoryCard';
+import MemoryCard from '../MemoryCard';
+import { SET_REQUIRED_COUNT } from '../../constants';
+import AbstractDataSet from './AbstractDataSet';
 
-export default class CatsDataSet {
+export default class CatsDataSet extends AbstractDataSet {
   static get name() {
     return 'cats';
   }
@@ -11,7 +13,8 @@ export default class CatsDataSet {
 
   baseName = 'cat';
 
-  constructor(count = 6) {
+  constructor(count = SET_REQUIRED_COUNT) {
+    super();
     this.count = count;
   }
 

@@ -1,16 +1,19 @@
 <template>
     <div class="container">
         <data-set-selector v-model="selectedDataSet" />
-        <section class="memory-game">
+        <section class="memory-game" v-if="!cards.isEmpty()">
             <memory-card v-for="(card, index) in shuffledDoubleCards" :key="card.name + index"
                          :card="card" />
+        </section>
+        <section v-else>
+            <div class="error">{{ cards.emptinessReason }}</div>
         </section>
     </div>
 </template>
 
 <script>
   import MemoryCard from './MemoryCard';
-  import DataSetFactory from '../datasets/DataSetFactory';
+  import DataSetFactory from '../model/DataSetFactory';
   import ArrayMixin from './mixins/array-mixin';
   import DataSetSelector from './DataSetSelector';
   import { DATA_SETS } from '../constants';
@@ -38,8 +41,11 @@
       },
     },
     watch: {
-      selectedDataSet(value) {
+      async selectedDataSet(value) {
         this.cards = (new DataSetFactory()).create(value);
+
+        await this.$nextTick();
+
         this.initGame();
       },
     },

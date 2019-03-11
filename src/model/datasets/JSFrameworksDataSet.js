@@ -1,6 +1,7 @@
-import MemoryCard from '../model/MemoryCard';
+import MemoryCard from '../MemoryCard';
+import AbstractDataSet from './AbstractDataSet';
 
-export default class JSFrameworksDataSet {
+export default class JSFrameworksDataSet extends AbstractDataSet {
   static get name() {
     return 'frameworks';
   }
