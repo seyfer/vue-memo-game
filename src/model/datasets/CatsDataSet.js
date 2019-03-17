@@ -19,7 +19,7 @@ export default class CatsDataSet extends AbstractDataSet {
   }
 
   * catsGenerator() {
-    for (const index of [...Array(this.flipCounter).keys()]) {
+    for (const index of [...Array(this.count).keys()]) {
       yield new MemoryCard(this.baseName + (index + 1), CatsDataSet.name, CatsDataSet.extension);
     }
   }

@@ -19,8 +19,6 @@ export default class DataSetFactory {
       //validate
       const validationProxy = new Proxy(instanceClass, DataSetValidator.getHandler());
 
-      console.clear();
-
       return new validationProxy(...args);
     } catch (e) {
       console.error(e.message);

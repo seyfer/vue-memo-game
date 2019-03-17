@@ -1,9 +1,9 @@
 <template>
     <div class="container">
-        <data-set-selector v-model="selectedDataSet" />
+        <data-set-selector v-model="selectedDataSet"/>
         <section class="memory-game" v-if="!cards.isEmpty()">
             <memory-card v-for="(card, index) in shuffledDoubleCards" :key="card.name + index"
-                         :card="card" />
+                         :card="card"/>
         </section>
         <section v-else>
             <div class="error">{{ cards.emptinessReason }}</div>
@@ -18,6 +18,8 @@
   import DataSetSelector from './DataSetSelector';
   import { DATA_SETS } from '../constants';
 
+  import { mapMutations, mapGetters } from 'vuex';
+
   export default {
     components: {
       MemoryCard,
@@ -26,30 +28,31 @@
     mixins: [ArrayMixin],
     data() {
       return {
-        cards: (new DataSetFactory()).create(this.selectedDataSet),
         hasFlippedCard: false,
         lockBoard: false,
         selectedDataSet: DATA_SETS.FRAMEWORKS,
       };
     },
     computed: {
-      doubleCards() {
-        return [...this.cards, ...this.cards];
-      },
       shuffledDoubleCards() {
         return this.shuffle(this.doubleCards);
       },
+      ...mapGetters(['doubleCards', 'cards']),
     },
     watch: {
       async selectedDataSet(value) {
-        this.cards = (new DataSetFactory()).create(value);
+        this.setCards((new DataSetFactory()).create(value));
 
         await this.$nextTick();
 
         this.initGame();
       },
     },
-    mounted() {
+    async created() {
+      this.setCards((new DataSetFactory()).create(this.selectedDataSet));
+
+      await this.$nextTick();
+
       this.initGame();
     },
     methods: {
@@ -114,6 +117,7 @@
         const cards = document.querySelectorAll('.memory-card');
         cards.forEach(card => card.addEventListener('click', flipCard));
       },
+      ...mapMutations(['setCards']),
     },
   };
 </script>
