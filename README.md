@@ -8,12 +8,11 @@ Also, in this project I wanted to use as much ES6 and Vue features as I can. :)
 ## TODO
 
 + make data set selector with input binding work
-- refactor the rest of pure js code to vue
-- fix data set selector with input binding
-- add win game indicator
++ refactor the rest of pure js code to vue
+- add new game button
 - add click counter
 - add maximum turns
-- use vuex to store game state
+- add win/lose game indicator
 
 ## Project setup
 ```
