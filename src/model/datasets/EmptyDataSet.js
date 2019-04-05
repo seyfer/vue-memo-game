@@ -16,4 +16,6 @@ export default class EmptyDataSet extends AbstractDataSet {
   get emptinessReason() {
     return Reflect.get(this, '_emptinessReason');
   }
+
+  [Symbol.iterator] = [][Symbol.iterator];
 }

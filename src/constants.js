@@ -5,3 +5,16 @@ export const DATA_SETS = {
 };
 
 export const SET_REQUIRED_COUNT = 6;
+
+export const DIFFICULTIES = {
+  EASY: 'easy',
+  NORMAL: 'normal',
+  HARD: 'hard',
+};
+
+export const DIFFICULTY_TO_FLIPS = {
+  [DIFFICULTIES.EASY]: 50,
+  [DIFFICULTIES.NORMAL]: 35,
+  [DIFFICULTIES.HARD]: 20,
+};
+

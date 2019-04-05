@@ -1,12 +1,39 @@
 @import "base";
-@import "data-set-selector";
+@import "selector";
 @import "memory-game";
 
 .container {
+    width: 50%;
     margin: 15px auto;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: lighten(#060AB2, 20%);
+    padding: 10px;
+
+    &__button {
+        margin-left: 20px;
+        background-color: #58B14C;
+        padding: 5px;
+        border-radius: 5px;
+        border: 1px solid;
+    }
+}
+
+.stats {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    color: #fff;
+    padding: 1px;
+    margin: 2px;
+    background-color: lighten(#060AB2, 20%);
 }
 
 .error {

@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import pathify, { make } from 'vuex-pathify';
+import { DIFFICULTY_TO_FLIPS } from '../constants';
 // set options
 pathify.options.mapping = 'simple';
 
@@ -8,6 +9,7 @@ Vue.use(Vuex);
 
 const state = {
   flipCounter: 0,
+  flipLimit: 100,
   cards: [],
   playCards: [],
   hasFlippedCard: false,
@@ -47,8 +49,15 @@ const store = new Vuex.Store({
     doubleCards(state) {
       return [...state.cards, ...state.cards];
     },
+    flipsLeft(state) {
+      return state.flipCounter < state.flipLimit ? state.flipLimit - state.flipCounter : 0;
+    },
   },
   actions: {
+    setDifficulty({}, value) {
+      console.log(value);
+      store.set('flipLimit', DIFFICULTY_TO_FLIPS[value] || 100);
+    },
     initCards({ getters }, cards) {
       store.set('cards', cards);
       store.set('playCards', getters.doubleCards);
@@ -63,6 +72,7 @@ const store = new Vuex.Store({
       }
 
       commit('setCardFlipped', card);
+      commit('incrementFlipCounter');
 
       if (!state.hasFlippedCard) {
         // first click
