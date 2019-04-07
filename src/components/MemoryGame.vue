@@ -4,20 +4,26 @@
             <selector :label="'Selected Cards Data Set'" :options="$options.dataSets" v-model="selectedDataSet" />
             <selector :label="'Difficulty'" :options="$options.difficulties" v-model="selectedDifficulty" />
 
-            <button @click="startGame(selectedDataSet)"
-                    class="header__button">New Game
+            <button @click="startGame(selectedDataSet, selectedDifficulty)"
+                    class="header__button">
+                New Game
             </button>
         </section>
+
         <section class="stats">
             <span>Clicks count: {{ flipCounter }}</span>
             <span>Clicks left: {{ flipsLeft }}</span>
         </section>
-        <section class="memory-game" v-if="!cards.isEmpty()">
-            <memory-card v-for="(card, index) in shuffledDoubleCards" :key="card.name + index"
-                         :card="card" />
-        </section>
+
+        <memory-game-result v-if="isEndGame" />
         <section v-else>
-            <div class="error">{{ cards.emptinessReason }}</div>
+            <section class="memory-game" v-if="!cards.isEmpty()">
+                <memory-card v-for="(card, index) in shuffledDoubleCards" :key="card.name + index"
+                             :card="card" />
+            </section>
+            <section v-else>
+                <div class="error">{{ cards.emptinessReason }}</div>
+            </section>
         </section>
     </div>
 </template>
@@ -30,11 +36,13 @@
   import { DATA_SETS, DIFFICULTIES } from '../constants';
 
   import { mapState, mapActions, mapGetters } from 'vuex';
+  import MemoryGameResult from './MemoryGameResult';
 
   export default {
     dataSets: DATA_SETS,
     difficulties: DIFFICULTIES,
     components: {
+      MemoryGameResult,
       MemoryCard,
       Selector,
     },
@@ -52,7 +60,7 @@
         return this.shuffle(this.playCards);
       },
       ...mapState(['cards', 'playCards', 'flipCounter']),
-      ...mapGetters(['flipsLeft']),
+      ...mapGetters(['flipsLeft', 'notSolvedCardsCount', 'isEndGame']),
     },
     watch: {
       async selectedDataSet(dataSetName) {

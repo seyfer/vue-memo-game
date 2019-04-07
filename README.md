@@ -7,8 +7,8 @@ Also, in this project I wanted to use as much ES6 and Vue features as I can. :)
 
 ## TODO
 
-- add win/lose game indicator
-- add different cards set size
+- add different cards set size (min 1 card, max 12 cards?)
+- add save of score to the local storage and display in table
 
 ## Project setup
 ```

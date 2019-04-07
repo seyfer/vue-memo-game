@@ -1,3 +1,6 @@
+$menu-background: lighten(#060AB2, 20%);
+$light-background: #EEEEEE;
+
 @import "base";
 @import "selector";
 @import "memory-game";
@@ -14,7 +17,7 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    background-color: lighten(#060AB2, 20%);
+    background-color: $menu-background;
     padding: 10px;
 
     &__button {
@@ -33,11 +36,11 @@
     color: #fff;
     padding: 1px;
     margin: 2px;
-    background-color: lighten(#060AB2, 20%);
+    background-color: $menu-background;
 }
 
 .error {
-    background-color: #EEEEEE;
+    background-color: $light-background;
     margin: 20px;
     padding: 20px;
     font-weight: bold;
