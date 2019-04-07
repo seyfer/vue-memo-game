@@ -16,7 +16,7 @@
         </section>
 
         <memory-game-result v-if="isEndGame" />
-        <section v-else>
+        <section class="container__game" v-else>
             <section class="memory-game" v-if="!cards.isEmpty()">
                 <memory-card v-for="(card, index) in shuffledDoubleCards" :key="card.name + index"
                              :card="card" />

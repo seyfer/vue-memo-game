@@ -2,6 +2,8 @@ export const DATA_SETS = {
   FRAMEWORKS: 'frameworks',
   CATS: 'cats',
   INVALID: 'invalid',
+  ANY: 'any',
+  TROLL: 'troll',
 };
 
 export const SET_REQUIRED_COUNT = 6;

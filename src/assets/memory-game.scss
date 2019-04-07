@@ -1,12 +1,13 @@
 @import "memory-card";
 
 .memory-game {
-    width: 640px;
-    height: 640px;
+    width: 100%;
+    height: 500px;
     margin: 15px auto;
     display: flex;
     flex-wrap: wrap;
     perspective: 1000px;
+    justify-content: center;
 }
 
 .end-status {

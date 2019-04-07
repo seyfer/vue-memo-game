@@ -6,11 +6,16 @@ $light-background: #EEEEEE;
 @import "memory-game";
 
 .container {
-    width: 50%;
+    width: 1000px;
     margin: 15px auto;
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    &__game {
+        width: inherit;
+        height: inherit;
+    }
 }
 
 .header {
@@ -26,6 +31,7 @@ $light-background: #EEEEEE;
         padding: 5px;
         border-radius: 5px;
         border: 1px solid;
+        font-weight: 900;
     }
 }
 
@@ -46,4 +52,5 @@ $light-background: #EEEEEE;
     font-weight: bold;
     font-size: 25px;
     color: #b00;
+    text-align: center;
 }

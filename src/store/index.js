@@ -47,7 +47,7 @@ const store = new Vuex.Store({
   },
   getters: {
     doubleCards(state) {
-      return [...state.cards, ...state.cards];
+      return 'doubleCards' in state.cards ? state.cards.doubleCards() : [...state.cards, ...state.cards];
     },
     flipsLeft(state) {
       return state.flipCounter < state.flipLimit ? state.flipLimit - state.flipCounter : 0;
@@ -56,7 +56,7 @@ const store = new Vuex.Store({
       return state.playCards.filter((card) => !card.solved).length;
     },
     isWin(state, getters) {
-      return getters.notSolvedCardsCount === 0 && getters.flipsLeft >= 0;
+      return state.playCards.length > 0 && getters.notSolvedCardsCount === 0 && getters.flipsLeft >= 0;
     },
     isLose(state, getters) {
       return getters.flipsLeft === 0 && getters.notSolvedCardsCount > 0;
@@ -65,7 +65,7 @@ const store = new Vuex.Store({
       return getters.isWin || getters.isLose;
     },
     score(state, getters) {
-      return getters.isEndGame ? state.flipLimit - getters.flipsLeft : 0;
+      return getters.isEndGame ? state.flipLimit - state.flipCounter : 0;
     },
   },
   actions: {

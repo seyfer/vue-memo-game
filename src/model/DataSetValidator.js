@@ -1,5 +1,4 @@
 import MemoryCard from './MemoryCard';
-import { SET_REQUIRED_COUNT } from '../constants';
 
 export default class DataSetValidator {
 
@@ -8,8 +7,8 @@ export default class DataSetValidator {
       construct(target, args) {
         const instance = new target(...args);
 
-        if ([...instance].length !== SET_REQUIRED_COUNT) {
-          throw new TypeError(`Set must return ${SET_REQUIRED_COUNT} cards`);
+        if ([...instance].length % 2 !== 0) {
+          throw new TypeError('Set must return odd number of cards');
         }
 
         for (const card of instance) {

@@ -3,6 +3,8 @@ import JSFrameworksDataSet from './datasets/JSFrameworksDataSet';
 import DataSetValidator from './DataSetValidator';
 import EmptyDataSet from './datasets/EmptyDataSet';
 import InvalidDataSet from './datasets/InvalidDataSet';
+import AnyDataSet from './datasets/AnyDataSet';
+import TrollDataSet from './datasets/TrollDataSet';
 
 export default class DataSetFactory {
   classMap = {
@@ -10,6 +12,8 @@ export default class DataSetFactory {
     cats: CatsDataSet,
     frameworks: JSFrameworksDataSet,
     invalid: InvalidDataSet,
+    any: AnyDataSet,
+    troll: TrollDataSet,
   };
 
   create(name, ...args) {
