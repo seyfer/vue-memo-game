@@ -1,8 +1,8 @@
 <template>
     <section class="selector">
-        <label v-if="label.length > 0">{{ label }}</label>
+        <label :for="id" v-if="label.length > 0">{{ label }}</label>
         <div class="selector__select">
-            <select @change="onChange">
+            <select @change="onChange" :id="id">
                 <option v-for="option in options"
                         :key="option"
                         :value="option"
@@ -19,8 +19,13 @@
   import FilterMixin from './../mixins/filter-mixin';
 
   export default {
+    name: 'AppSelector',
     mixins: [FilterMixin],
     props: {
+      id: {
+        type: String,
+        required: true,
+      },
       value: {
         type: String,
       },

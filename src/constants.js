@@ -6,7 +6,9 @@ export const DATA_SETS = {
   TROLL: 'troll',
 };
 
-export const SET_REQUIRED_COUNT = 6;
+export const DEFAULT_COUNT = 6;
+export const MIN_COUNT = 2;
+export const MAX_COUNT = 24;
 
 export const DIFFICULTIES = {
   EASY: 'easy',
@@ -15,8 +17,8 @@ export const DIFFICULTIES = {
 };
 
 export const DIFFICULTY_TO_FLIPS = {
-  [DIFFICULTIES.EASY]: 50,
-  [DIFFICULTIES.NORMAL]: 35,
-  [DIFFICULTIES.HARD]: 20,
+  [DIFFICULTIES.EASY]: 5.5,
+  [DIFFICULTIES.NORMAL]: 4,
+  [DIFFICULTIES.HARD]: 3,
 };
 

@@ -7,8 +7,9 @@ Also, in this project I wanted to use as much ES6 and Vue features as I can. :)
 
 ## TODO
 
-- make difficulty dynamic based on data set size and set max/min cards limits
 - add save of score to the local storage and display in table
+//https://github.com/ratiw/vuetable-2 or https://github.com/matfish2/vue-tables-2
+- find out how to fix rotation bug
 
 ## Project setup
 ```

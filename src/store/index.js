@@ -69,9 +69,9 @@ const store = new Vuex.Store({
     },
   },
   actions: {
-    setDifficulty({}, value) {
-      console.log(value);
-      store.set('flipLimit', DIFFICULTY_TO_FLIPS[value] || 100);
+    setDifficulty({state}, value) {
+      const flips = Math.ceil([...state.cards].length * DIFFICULTY_TO_FLIPS[value]);
+      store.set('flipLimit', flips || 100);
     },
     initCards({ getters }, cards) {
       store.set('cards', cards);

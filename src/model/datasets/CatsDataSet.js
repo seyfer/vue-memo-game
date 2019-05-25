@@ -1,5 +1,5 @@
 import MemoryCard from '../MemoryCard';
-import { SET_REQUIRED_COUNT } from '../../constants';
+import { DEFAULT_COUNT } from '../../constants';
 import AbstractDataSet from './AbstractDataSet';
 
 export default class CatsDataSet extends AbstractDataSet {
@@ -13,7 +13,7 @@ export default class CatsDataSet extends AbstractDataSet {
 
   baseName = 'cat';
 
-  constructor(count = SET_REQUIRED_COUNT) {
+  constructor(count = DEFAULT_COUNT) {
     super();
     this.count = count;
   }

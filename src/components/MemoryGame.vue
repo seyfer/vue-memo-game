@@ -1,8 +1,13 @@
 <template>
     <div class="container">
         <section class="header">
-            <selector :label="'Selected Cards Data Set'" :options="$options.dataSets" v-model="selectedDataSet" />
-            <selector :label="'Difficulty'" :options="$options.difficulties" v-model="selectedDifficulty" />
+            <app-selector
+                    :id="'data-set-selector'"
+                    :label="'Selected Cards Data Set'" :options="$options.dataSets" v-model="selectedDataSet"
+            />
+            <app-selector
+                    :id="'difficulty-selector'"
+                    :label="'Difficulty'" :options="$options.difficulties" v-model="selectedDifficulty" />
 
             <button @click="startGame(selectedDataSet, selectedDifficulty)"
                     class="header__button">
@@ -15,7 +20,7 @@
             <span>Clicks left: {{ flipsLeft }}</span>
         </section>
 
-        <memory-game-result v-if="isEndGame" />
+        <memory-game-result v-if="endGame" />
         <section class="container__game" v-else>
             <section class="memory-game" v-if="!cards.isEmpty()">
                 <memory-card v-for="(card, index) in shuffledDoubleCards" :key="card.name + index"
@@ -32,9 +37,9 @@
   import MemoryCard from './MemoryCard';
   import DataSetFactory from '../model/DataSetFactory';
   import ArrayMixin from './mixins/array-mixin';
-  import Selector from './common/Selector';
+  import AppSelector from './common/AppSelector';
   import { DATA_SETS, DIFFICULTIES } from '../constants';
-
+  import { delay } from 'lodash';
   import { mapState, mapActions, mapGetters } from 'vuex';
   import MemoryGameResult from './MemoryGameResult';
 
@@ -44,15 +49,14 @@
     components: {
       MemoryGameResult,
       MemoryCard,
-      Selector,
+      AppSelector,
     },
     mixins: [ArrayMixin],
     data() {
       return {
-        hasFlippedCard: false,
-        lockBoard: false,
         selectedDataSet: DATA_SETS.FRAMEWORKS,
         selectedDifficulty: DIFFICULTIES.NORMAL,
+        endGame: false,
       };
     },
     computed: {
@@ -68,6 +72,11 @@
       },
       async selectedDifficulty(value) {
         await this.startGame(this.selectedDataSet, value);
+      },
+      isEndGame(newValue) {
+        newValue
+          ? delay(() => this.endGame = newValue, 1000)
+          : this.endGame = false;
       },
     },
     async created() {
